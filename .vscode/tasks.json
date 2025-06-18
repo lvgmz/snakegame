@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Snake Game (Raylib)",
+      "type": "shell",
+      "command": "gcc",
+      "args": [
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wshadow",
+        "-Wformat=2",
+        "-Wcast-align",
+        "-Wconversion",
+        "-Wsign-conversion",
+        "-Wnull-dereference",
+        "-g3",
+        "-O0",
+        "/home/leova/Code/snakegame/main.c",
+        "-o",
+        "./build/Debug/outDebug",
+        "-lraylib",
+        "-lGL",
+        "-lm",
+        "-lpthread",
+        "-ldl",
+        "-lrt",
+        "-lX11"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Build task for Raylib-based C game"
+    }
+  ]
+}
