@@ -1,6 +1,7 @@
 #include "raylib.h"
 
 #define SQUARE 20
+#define MAX 10
 
 // Struct that makes SnakeSegment a x,y position for a snake segment
 typedef struct SnakeSegment {
@@ -13,8 +14,8 @@ int main()  {
     InitWindow(screenWidth, screenHeight, "snakegame");
     SetTargetFPS(10);
 
-    // Array that stores positions max length of 3 for testing
-    SnakeSegment snake[3];
+    // Array that stores positions of each snake segment
+    SnakeSegment snake[MAX];
     int snakeLength = 3;
 
     // sets initial position for snake
@@ -28,7 +29,8 @@ int main()  {
     // makes food
     Vector2 food = {(float)(GetRandomValue(0, (screenWidth / SQUARE) - 1) * SQUARE), 
                     (float)(GetRandomValue(0, (screenHeight / SQUARE) - 1) * SQUARE)};
-
+    
+    
     while(!WindowShouldClose()) {
 
         // inputs
@@ -52,7 +54,14 @@ int main()  {
         snake[0].position.x += direction.x;
         snake[0].position.y += direction.y;
         
-
+        // food collision
+        if ((int)snake[0].position.x == (int)food.x && (int)snake[0].position.y == (int)food.y) {
+            if (snakeLength < 7) snakeLength++;
+            // new food location
+            food = (Vector2){(float)(GetRandomValue(0, (screenWidth / SQUARE) - 1) * SQUARE), 
+                    (float)(GetRandomValue(0, (screenHeight / SQUARE) - 1) * SQUARE)};
+    
+        }
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
