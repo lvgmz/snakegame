@@ -17,13 +17,17 @@ int main()  {
     SnakeSegment snake[3];
     int snakeLength = 3;
 
-    //sets initial position for snake
+    // sets initial position for snake
     for (int i = 0; i < snakeLength; i++) {
         snake[i].position = (Vector2){screenWidth/2 - i*SQUARE, screenHeight/2};
     }
 
     // vector that stores where snake will go next
     Vector2 direction = {SQUARE, 0};
+
+    // makes food
+    Vector2 food = {(float)(GetRandomValue(0, (screenWidth / SQUARE) - 1) * SQUARE), 
+                    (float)(GetRandomValue(0, (screenHeight / SQUARE) - 1) * SQUARE)};
 
     while(!WindowShouldClose()) {
 
@@ -57,6 +61,9 @@ int main()  {
         for(int i = 0; i < snakeLength; i++) {
             DrawRectangleV(snake[i].position, (Vector2){SQUARE, SQUARE}, DARKGREEN);
         }
+
+        // draws food
+        DrawRectangleV(food, (Vector2) {SQUARE, SQUARE}, RED);
 
 
         EndDrawing();
