@@ -1,5 +1,4 @@
 #include "raylib.h"
-#include <stdbool.h>
 
 #define SQUARE 25
 #define MAX (100)
@@ -83,6 +82,19 @@ int main()  {
             // max length reached
             if (snakeLength > MAX) GAMEOVER = true;
         }
+        else {
+            if (IsKeyPressed(KEY_R)) {
+                //reset game
+                snakeLength = 3;
+                for (int i = 0; i < snakeLength; i++) {
+                    snake[i].position = (Vector2){screenWidth/2 - i*SQUARE, screenHeight/2};
+                }
+                direction = (Vector2) {SQUARE, 0};
+                food = (Vector2){(float)(GetRandomValue(0, (screenWidth / SQUARE) - 1) * SQUARE), 
+                                (float)(GetRandomValue(0, (screenHeight / SQUARE) - 1) * SQUARE)};
+                GAMEOVER = false;
+            }
+        }
         
 
         BeginDrawing();
@@ -98,7 +110,7 @@ int main()  {
             DrawRectangleV(food, (Vector2) {SQUARE, SQUARE}, RED);
         }
         else {
-            DrawText("GAME OVER", screenWidth/2, screenHeight/2, 20, RED);
+            DrawText("GAME OVER press R to restart!", screenWidth/2 - 200, screenHeight/2, 20, RED);
         }
         
 
